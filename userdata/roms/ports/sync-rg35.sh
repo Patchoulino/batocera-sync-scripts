@@ -3,7 +3,6 @@
 # Executing this from rg35xx batocera ports
 
 function define_destination (){
-    #src=$(ifconfig wlan1 | grep 'inet ' | awk '{print $2}')
     src=$(hostname).lan
     case $src in
         rg35xx-h*)
