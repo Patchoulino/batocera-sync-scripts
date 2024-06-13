@@ -2,6 +2,15 @@
 # To sync stuff from batocera rg35xx devices
 # Executing this from rg35xx batocera ports
 
+exclude_list="
+decorations/
+extractions/
+kodi/
+library/
+lost+found/
+system/
+"
+
 function define_destination (){
     src=$(ifconfig | grep wlan -A1 | grep 'inet' | awk '{print $2}')
     dst=192.168.1.XXX
@@ -21,16 +30,6 @@ function validate_destination(){
 }
 
 function sync_stuff(){
-    local exclude_list=$(cat <<EOF
-decorations/
-extractions/
-kodi/
-library/
-lost+found/
-system/
-EOF
-)
-
     echo "[$(date)] PUSH $src -> $dst"
     rsync -avruP --exclude-from=<(echo "$exclude_list") /userdata/ $dst:/userdata/
 
