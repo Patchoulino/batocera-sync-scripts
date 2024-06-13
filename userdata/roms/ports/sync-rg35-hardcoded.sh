@@ -3,7 +3,7 @@
 # Executing this from rg35xx batocera ports
 
 function define_destination (){
-    src=$(ifconfig wlan1 | grep 'inet ' | awk '{print $2}')
+    src=$(ifconfig | grep wlan -A1 | grep 'inet' | awk '{print $2}')
     dst=192.168.1.XXX
 }
 
